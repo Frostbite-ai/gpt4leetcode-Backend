@@ -22,6 +22,8 @@ const openai = new OpenAIApi(configuration);
 const port = process.env.PORT || 8000;
 
 
+
+
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
 })
@@ -29,6 +31,17 @@ app.get('/', (req, res) => {
 app.post("/simplify", async (req, res) => {
     console.log(req.body);
     const messages = req.body.messages;
+    const password = req.headers.password;
+    console.log(password);
+  
+    // Check the password
+    if (password !== process.env.PASSWORD) {
+      return res.status(200).json({
+        success: true,
+        message: "Unauthorized: Incorrect password",
+      });
+    }
+
     try {
       if (messages == null) {
         throw new Error("Uh oh, no messages were provided");
@@ -58,6 +71,19 @@ app.post("/simplify", async (req, res) => {
 app.post("/solve", async (req, res) => {
     console.log(req.body);
     const messages = req.body.messages;
+    const password = req.headers.password;  
+    
+  
+    // Check the password
+    if (password !== process.env.PASSWORD ) {
+      return res.status(200).json({
+        success: true,
+        message: "Unauthorized: Incorrect password",
+      });
+    }
+
+
+
     try {
       if (messages == null) {
         throw new Error("Uh oh, no question was provided");

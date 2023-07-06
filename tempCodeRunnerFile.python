@@ -1,0 +1,12 @@
+def getMinOperations(series):
+    stack = []
+    for char in series:
+        if stack and stack[-1] == char:
+            continue
+        else:
+            stack.append(char)
+    return len(set(stack))
+
+# Driver code
+series = "abcddcba"
+print(getMinOperations(series))  # Expected output: 4
