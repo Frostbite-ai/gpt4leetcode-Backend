@@ -22,6 +22,9 @@ const openai = new OpenAIApi(configuration);
 const port = process.env.PORT || 8000;
 
 
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
 
 app.post("/simplify", async (req, res) => {
     console.log(req.body);
