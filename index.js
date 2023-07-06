@@ -96,7 +96,7 @@ app.post('/run-python', (req, res) => {
         }
         console.log('Python code written to file. About to run Python code');
 
-        exec(`/opt/homebrew/bin/python3 /tmp/temp.py`, (error, stdout, stderr) => {
+        exec(`$(which python3) /tmp/temp.py`, (error, stdout, stderr) => {
             if (error) {
                 console.error('Error running Python code:', error);
                 return res.json({ success: false, message: error.message, output: null });
